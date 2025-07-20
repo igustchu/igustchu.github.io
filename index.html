@@ -87,10 +87,10 @@
                 case 'd': // ขวา
                     cube.position.x += moveSpeed;
                     break;
-                case 'w': // หน้า
+                case 'w': // หลัง
                     cube.position.z -= moveSpeed;
                     break;
-                case 's': // หลัง
+                case 's': // หน้า
                     cube.position.z += moveSpeed;
                     break;
                 case 'z': // z - ยกขึ้น
@@ -100,22 +100,22 @@
                     cube.position.y -= moveSpeed;
                     break;
                 case 'q':
-                    cube.rotation.y -= 0.1; // หมุนซ้าย
+                    cube.rotation.y -= 0.1; // หมุนรอบแกน Y ทวนเข็มนาฬิกา (มองจากด้านบน) //ซ้าย
                     break;
                 case 'e':
-                    cube.rotation.y += 0.1; // หมุนขวา
+                    cube.rotation.y += 0.1; // หมุนรอบแกน Y ตามเข็มนาฬิกา //ขวา
                     break;
                 case 'r':
-                    cube.rotation.x -= 0.1; // หมุนบน
+                    cube.rotation.x -= 0.1; //  หมุนรอบแกน X ทวนเข็มนาฬิกา (มองจากด้านข้าง) //เงย
                     break;
                 case 't':
-                    cube.rotation.x += 0.1; // หมุนล่าง
+                    cube.rotation.x += 0.1; // หมุนรอบแกน X ตามเข็มนาฬิกา //ก้ม
                     break;
                 case 'y':
-                    cube.rotation.z -= 0.1; // หมุนบน
+                    cube.rotation.z -= 0.1; // หมุนรอบแกน Z ทวนเข็มนาฬิกา (มองจากด้านหน้า) //เอียงหัวขวา
                     break;
                 case 'u':
-                    cube.rotation.z += 0.1; // หมุนล่าง
+                    cube.rotation.z += 0.1; // หมุนรอบแกน Z ตามเข็มนาฬิกา //เอียงหัวซ้าย
                     break;
                 case 'i': // ขนาดเล็ก
                     cube.scale.set(1, 0.5, 0.5);
