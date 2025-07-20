@@ -50,16 +50,34 @@
         camera.lookAt(0, 0, 0);
 
         // ✅ กล่อง
-        const geometry = new THREE.BoxGeometry(1, 1, 1);
+        const geometry = new THREE.BoxGeometry(2, 1, 1);
         const material = new THREE.MeshStandardMaterial({ color: 0xff0000 });
         const cube = new THREE.Mesh(geometry, material);
         cube.castShadow = true; // ✅ กล่องส่งเงา
         cube.receiveShadow = false; // ✅ กล่องไม่รับเงา (ไม่จำเป็น)
         scene.add(cube);
+        
 
+        // ✅ ทรงกลม
+        const geometry2 = new THREE.SphereGeometry(0.5, 16, 16);
+        const sphere = new THREE.Mesh(
+            geometry2,
+            new THREE.MeshStandardMaterial({ color: 0x00ff00 })
+        );
+        sphere.position.set(2, 0.5, 0);
+        sphere.castShadow = true; // ✅ ทรงกลมส่งเงา
+        scene.add(sphere);
 
+        // ✅ พื้น
+        const planeGeometry = new THREE.PlaneGeometry(10, 10);
+        const planeMaterial = new THREE.MeshStandardMaterial({ color: 0xffffff });
+        const plane = new THREE.Mesh(planeGeometry, planeMaterial);
+        plane.rotation.x = -Math.PI / 2; // หมุนให้เป็นพื้น
+        plane.position.y = -0.5;
+        plane.receiveShadow = true; // ✅ พื้นรับเงา
+        scene.add(plane);
 
-        let moveSpeed = 0.1;
+      let moveSpeed = 0.1;
 
         window.addEventListener('keydown', (event) => {
             switch (event.key.toLowerCase()) {
@@ -87,20 +105,26 @@
                 case 'e':
                     cube.rotation.y += 0.1; // หมุนขวา
                     break;
-                case 'c':
+                case 'r':
                     cube.rotation.x -= 0.1; // หมุนบน
                     break;
-                case 'v':
-                    cube.rotation.x -= 0.1; // หมุนล่าง
+                case 't':
+                    cube.rotation.x += 0.1; // หมุนล่าง
+                    break;
+                case 'y':
+                    cube.rotation.z -= 0.1; // หมุนบน
+                    break;
+                case 'u':
+                    cube.rotation.z += 0.1; // หมุนล่าง
                     break;
                 case 'i': // ขนาดเล็ก
-                    cube.scale.set(0.5, 0.5, 0.5);
+                    cube.scale.set(1, 0.5, 0.5);
                     break;
                 case 'o': // ขนาดกลาง
-                    cube.scale.set(1, 1, 1);
+                    cube.scale.set(2, 1, 1);
                     break;
                 case 'p': // ขนาดใหญ่
-                    cube.scale.set(2, 2, 2);
+                    cube.scale.set(3, 2, 2);
                     break;
                 case 'm': 
                     cube.material.color.set(Math.random() * 0xffffff); //randomสี
@@ -111,37 +135,18 @@
         });
 
 
-        // ✅ ทรงกลม
-        const geometry2 = new THREE.SphereGeometry(0.5, 16, 16);
-        const sphere = new THREE.Mesh(
-            geometry2,
-            new THREE.MeshStandardMaterial({ color: 0x00ff00 })
-        );
-        sphere.position.set(2, 0.5, 0);
-        sphere.castShadow = true; // ✅ ทรงกลมส่งเงา
-        scene.add(sphere);
-
-        // ✅ พื้น
-        const planeGeometry = new THREE.PlaneGeometry(10, 10);
-        const planeMaterial = new THREE.MeshStandardMaterial({ color: 0xffffff });
-        const plane = new THREE.Mesh(planeGeometry, planeMaterial);
-        plane.rotation.x = -Math.PI / 2; // หมุนให้เป็นพื้น
-        plane.position.y = -0.5;
-        plane.receiveShadow = true; // ✅ พื้นรับเงา
-        scene.add(plane);
 
         // ✅ render loop
         function animate(t) {
             cube.scale.x = 2;
-            //cube.rotation.z = t * 0.010;
-            cube.rotation.y = t * 0.001;
+            cube.rotation.y = t * 0.01;
+            //cube.rotation.y = t * 0.001;
 
             sphere.rotation.y = t * 0.001;
 
             renderer.render(scene, camera);
             requestAnimationFrame(animate);
         }
-
 
         //ขยับต่อเนื่องเมื่อกดค้าง
         let keys = {};
@@ -165,23 +170,22 @@
             if (keys['x']) cube.position.y -= moveSpeed;
             if (keys['q']) cube.rotation.y -= 0.1;
             if (keys['e']) cube.rotation.y += 0.1;
-            if (keys['c']) cube.rotation.x -= 0.1;
-            if (keys['v']) cube.rotation.x += 0.1;
-            if (keys['i']) cube.scale.set(0.5, 0.5, 0.5);
-            if (keys['o']) cube.scale.set(1, 1, 1);
-            if (keys['p']) cube.scale.set(2, 2, 2);
+            if (keys['r']) cube.rotation.x -= 0.1;
+            if (keys['t']) cube.rotation.x += 0.1;
+            if (keys['y']) cube.rotation.z -= 0.1;
+            if (keys['u']) cube.rotation.z += 0.1;
+            if (keys['i']) cube.scale.set(1, 0.5, 0.5);
+            if (keys['o']) cube.scale.set(2, 1, 1);
+            if (keys['p']) cube.scale.set(3, 2, 2);
+
 
 
             renderer.render(scene, camera);
         }
 
         animate();
-
+        
         animate(0);
-
-
-
-
 
     </script>
 </body>
